@@ -4,6 +4,17 @@
 
  $articles = getArticles();
  session_start();
+if(!empty($_POST['deco'])){
+	if(!empty($_SESSION['user'])){
+		unset($_SESSION['user']);
+		$_SESSION['message'] = 'Vous êtes bien déconnecté !';
+		header('Location: index.php');
+		exit;
+	}
+}
+var_dump($_POST);
+var_dump($_SESSION);
+
  ?>
  
 	 <!DOCTYPE html>
@@ -25,7 +36,7 @@
 	  </head>
 	  <body class="bg-dark">
 		<?php require_once('./mvc/partials/header.php');?>
-			
+		
 		<div class="container">
 			<div class="row">
 				<?php foreach ($articles as $article):?>
@@ -41,7 +52,9 @@
 				<?php endforeach;?>
 			</div>
 		</div>
-		
+		<form action="" method="POST" name="deco">
+			<input type="button" value="deconnexion" name="deco">
+		</form>
 		
 		<?php require_once('./mvc/partials/footer.php');?>
 	  </body>
